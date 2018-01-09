@@ -1,0 +1,58 @@
+package com.atm;
+
+import java.util.Scanner;
+
+public class DepositeAtmUi extends AbstractAtmUi { // 存款界面
+
+	public String amount;
+
+	public DepositeAtmUi(AtmUser user) {
+		super(user);
+	}
+
+	@Override
+	public AbstractAtmUi show() {
+		System.out.println("存款业务");
+		System.out.println("请输入存款金额: ");
+		amount = AbstractAtmUi.input.nextLine();
+		System.out.println("1: 确认");
+		System.out.println("2: 重新输入");
+		System.out.println("3: 返回主菜单");
+		String option = AbstractAtmUi.input.nextLine();
+		if (option.equals("1")) {
+			if (!depositeVerify()) {
+				return this;
+			}
+			if (AbstractAtmUi.service.deposite(Double.valueOf(amount))) {
+				System.out.println("操作成功!");
+				return new MainMenuAtmUi(user);
+			} else {
+				System.out.println("余额不足!");
+				return this;
+			}
+		} else if (option.equals("2")) {
+			return new DepositeAtmUi(user);
+		} else if (option.equals("3")) {
+			return new MainMenuAtmUi(user);
+		} else {
+			System.out.println("输入有误, 请重新输入!");
+			return this;
+		}
+	}
+
+	private boolean depositeVerify() {
+		if (!CommonUtil.isNumber(amount)) {
+			System.out.println(amount + "不是数字!");
+			System.out.println("输入有误, 请重新输入!");
+			return false;
+		}
+
+		if (Double.valueOf(amount) % 100 != 0 || Double.valueOf(amount) <= 0) {
+			System.out.println("请输入100的整数倍!");
+			System.out.println("输入有误, 请重新输入!");
+			return false;
+		}
+
+		return true;
+	}
+}
