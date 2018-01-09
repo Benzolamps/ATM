@@ -4,16 +4,12 @@ import com.atm.AbstractAtmUi;
 
 public class Test {
 	public static void main(String[] args) {
-		AtmUser user = new AtmUser(null, null, null);
-		AbstractAtmUi ui = new LoginAtmUi(user); // 程序刚开始运行登录界面
+		AbstractAtmUi ui = new LoginAtmUi(); // 程序刚开始运行登录界面
 
 		/*
 		显示当前界面，并将ui指向下一个界面
 		*/
-		while (true) {
-			if (ui == null) {
-				break;
-			}
+		while (ui != null) {
 			ui = ui.show();
 		}
 	}

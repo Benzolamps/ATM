@@ -10,10 +10,6 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 
 	private boolean inputFinished = false; // 表示用户是否完成了输入
 
-	public TransferAtmUi(AtmUser user) {
-		super(user);
-	}
-
 	@Override
 	public AbstractAtmUi show() {
 		if (inputFinished) {
@@ -42,7 +38,7 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 		} else if (option.equals("2")) {
 			return this;
 		} else if (option.equals("3")) {
-			return new MainMenuAtmUi(user);
+			return new MainMenuAtmUi();
 		} else {
 			System.out.println("输入有误, 请重新输入!");
 			return this;
@@ -85,7 +81,7 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 		if (option.equals("1")) {
 			if (AbstractAtmUi.service.transfer(transferUser, Double.valueOf(amount))) {
 				System.out.println("操作成功!");
-				return new MainMenuAtmUi(user);
+				return new MainMenuAtmUi();
 			} else {
 				System.out.println("余额不足!");
 				inputFinished = false;
@@ -95,7 +91,7 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 			inputFinished = false;
 			return this;
 		} else if (option.equals("3")) {
-			return new MainMenuAtmUi(user);
+			return new MainMenuAtmUi();
 		} else {
 			System.out.println("输入有误, 请重新输入!");
 			return this;

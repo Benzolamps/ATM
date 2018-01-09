@@ -4,10 +4,6 @@ public class DebitAtmUi extends AbstractAtmUi { // 取款界面
 
 	public String amount;
 
-	public DebitAtmUi(AtmUser user) {
-		super(user);
-	}
-
 	@Override
 	public AbstractAtmUi show() {
 		System.out.println("取款业务");
@@ -21,15 +17,15 @@ public class DebitAtmUi extends AbstractAtmUi { // 取款界面
 			if (!debitVerify()) return this;
 			if (AbstractAtmUi.service.debit(Double.valueOf(amount))) {
 				System.out.println("操作成功!");
-				return new MainMenuAtmUi(user);
+				return new MainMenuAtmUi();
 			} else {
 				System.out.println("余额不足!");
 				return this;
 			}
 		} else if (option.equals("2")) {
-			return new DepositeAtmUi(user);
+			return new DepositeAtmUi();
 		} else if (option.equals("3")) {
-			return new MainMenuAtmUi(user);
+			return new MainMenuAtmUi();
 		} else {
 			System.out.println("输入有误, 请重新输入!");
 			return this;
