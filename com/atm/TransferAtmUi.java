@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 
+	private String cardFormat = "[0-9]{3}"; // 卡号长度
+
 	private AtmUser transferUser = null;
 
 	private String amount = "";
@@ -24,6 +26,9 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 		System.out.println("请输入对方的银行卡号: ");
 		String account = AbstractAtmUi.input.nextLine();
 		transferUser = new AtmUser(account, null);
+		if (!accountVerify()) {
+			return this;
+		}
 		System.out.println("请输入转账金额:");
 		amount = AbstractAtmUi.input.nextLine();
 		System.out.println("1: 确认");
@@ -45,7 +50,11 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 		}
 	}
 
-	private boolean transferVerify() {
+	private boolean accountVerify() {
+		if (!transferUser.getAccount().matches(cardFormat)) {
+			System.out.println("卡号格式错误!");
+			return false;
+		}
 		if (user.equals(transferUser)) {
 			System.out.println("不能给自己转账!");
 			return false;
@@ -55,7 +64,10 @@ public class TransferAtmUi extends AbstractAtmUi { // 转账界面
 			System.out.println("账号不存在, 请重新输入!");
 			return false;
 		}
-
+		return true;
+	}
+	
+	private boolean transferVerify() {
 		if (!CommonUtil.isNumber(amount)) {
 			System.out.println(amount + "不是数字!");
 			System.out.println("输入有误, 请重新输入!");

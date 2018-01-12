@@ -62,14 +62,16 @@ public class AtmService { // ATM服务
 		if (amount > user.getBalance()) { // 余额不足
 			return false;
 		} else {
-			user.setBalance(user.getBalance() - amount);
-			transferUser.setBalance(transferUser.getBalance() + amount);
+			String message1 = "转账给" + transferUser.getUsername();
+			String message2 = user.getUsername() + "转账";
+			user.setBalance(user.getBalance() - amount, message1);
+			transferUser.setBalance(transferUser.getBalance() + amount, message2);
 			return true;
 		}
 	}
 
 	public boolean deposite(double amount) { // 存款
-		user.setBalance(user.getBalance() + amount);
+		user.setBalance(user.getBalance() + amount, "存款");
 		return true;
 	}
 
@@ -77,7 +79,7 @@ public class AtmService { // ATM服务
 		if (amount > user.getBalance()) { // 余额不足
 			return false;
 		} else {
-			user.setBalance(user.getBalance() - amount);
+			user.setBalance(user.getBalance() - amount, "取款");
 			return true;
 		}
 	}
