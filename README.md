@@ -138,9 +138,9 @@ list.encureCapicity(255);
 #### 对ArrayList进行遍历, 并执行action对象中的accept()方法
 ```java
 list.forEach(new Consumer<String>() {
-	@Override
-	public void accept(String str) {
-		System.out.println(str.toUpperCase());
+    @Override
+    public void accept(String str) {
+        System.out.println(str.toUpperCase());
 	}
 });
 ```
@@ -151,5 +151,5 @@ STUDIO
 STUDIO
 ```
 #### 说明
-**action对象实现了Consumer接口，forEach()方法通过调用action对象的```accept()```**方法来实现遍历**
+**action对象实现了Consumer接口，forEach()方法通过调用action对象的```accept()```方法来实现遍历**
 
