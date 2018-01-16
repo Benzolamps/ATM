@@ -1,7 +1,7 @@
 # ```ArrayList<T>```
 ## 1) 类的包名
 ### ```java.util```
-##2) 类的构造方法
+## 2) 类的构造方法
 ### a) ```ArrayList<T>()```
 #### 初始化一个空的ArrayList, 初始空间为10
 ***Constructs an empty list with an initial capacity of ten.***
